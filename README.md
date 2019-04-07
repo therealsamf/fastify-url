@@ -23,12 +23,12 @@ fastify.get('/*', (req, reply) => {
 
   req.log.info(url.host);          // 'sub.example.com:8080'
   req.log.info(url.hostname);      // 'sub.example.com'
-  req.log.info(url.href);          // 'https://user:pass@sub.example.com:8080/p/a/t/h?query=string'
-  req.log.info(url.origin);        // 'https://sub.example.com:8080'
+  req.log.info(url.href);          // 'http://user:pass@sub.example.com:8080/p/a/t/h?query=string'
+  req.log.info(url.origin);        // 'http://sub.example.com:8080'
   req.log.info(url.password);      // 'pass'
   req.log.info(url.pathname);      // '/p/a/t/h'
   req.log.info(url.port);          // '8080'
-  req.log.info(url.protocol);      // 'https:'
+  req.log.info(url.protocol);      // 'http:'
   req.log.info(url.search);        // '?query=string'
   req.log.info(url.username);      // 'user'
 
@@ -38,7 +38,7 @@ fastify.get('/*', (req, reply) => {
   reply.send();
 });
 
-// GET: 'https://user:pass@sub.example.com:8080/p/a/t/h?query=string'
+// GET: 'http://user:pass@sub.example.com:8080/p/a/t/h?query=string'
 ```
 
 ## Options
