@@ -123,7 +123,8 @@ describe('fastifyUrl', function(): void {
             )
           );
           http
-            .get(new url.URL(urlString), (): void => {})
+            // .get(new url.URL(urlString), (): void => {})
+            .get(url.parse(urlString))
             .on('error', done)
             .on(
               'end',
