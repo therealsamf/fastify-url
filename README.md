@@ -43,7 +43,12 @@ fastify.get('/*', (req, reply) => {
 
 ## Options
 
+### protocol
 
+Type: `string`
+Default: `http`
+
+This property allows you to change the protocol the incoming request's URL object will absorb. This is used because it's difficult to find the protocol the request was received from within the request handler.
 
 ## `fastify-url` vs `fastify-url-data`
 
