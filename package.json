@@ -1,6 +1,6 @@
 {
   "name": "fastify-url",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Fastify plugin for parsing and attaching URL data to requests",
   "main": "dist/index.js",
   "scripts": {
