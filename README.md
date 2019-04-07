@@ -1,6 +1,12 @@
 fastify-url
 ===========
 
+[![NPM](https://img.shields.io/npm/v/fastify-url.svg)](https://www.npmjs.com/package/fastify-url)
+[![Build Status](https://travis-ci.org/therealsamf/fastify-url.svg?branch=master)](https://travis-ci.org/therealsamf/fastify-url)
+[![codecov.io Code Coverage](https://img.shields.io/codecov/c/github/therealsamf/fastify-url.svg?maxAge=2592000)](https://codecov.io/github/therealsamf/fastify-url?branch=master)
+
+
+
 A plugin for [fastify](https://www.fastify.io/) for accessing an incoming [request](https://www.fastify.io/docs/latest/Request/)'s URL data.
 
 `fastify-url` is inspired by [`fastify-url-data`](https://github.com/fastify/fastify-url-data) and is just a thin wrapper around Node's [URL](https://nodejs.org/api/url.html#url_class_url) object.
