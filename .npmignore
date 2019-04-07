@@ -2,7 +2,9 @@
 src/
 
 .prettierrc
+.eslintrc
 tsconfig.json
 .gitignore
 
-example/
+coverage/
+.nyc_output/
