@@ -1,0 +1,9 @@
+
+# NodeJS
+node_modules/
+
+# istanbul
+.nyc_output
+coverage/
+
+dist/

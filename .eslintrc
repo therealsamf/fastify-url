@@ -1,0 +1,22 @@
+
+{
+  "extends": [
+    "google",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["prettier", "@typescript-eslint"],
+  "rules": {
+    "no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/adjacent-overload-signatures": "error",
+    "@typescript-eslint/class-name-casing": "error",
+    "@typescript-eslint/interface-name-prefix": ["error", "always"],
+    "@typescript-eslint/explicit-function-return-type": ["error", { "allowExpressions": false }],
+    "@typescript-eslint/explicit-member-accessibility": "error",
+
+    "prettier/prettier": "error"
+  }
+}
