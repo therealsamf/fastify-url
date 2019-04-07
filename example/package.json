@@ -1,0 +1,11 @@
+{
+  "description": "fastify-url example project",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "fastify": "^2.2.0",
+    "fastify-url": "^0.1.1",
+    "pino-pretty": "^2.6.0"
+  }
+}

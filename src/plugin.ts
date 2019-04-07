@@ -56,4 +56,5 @@ function fastifyUrl(
 
 export default fastifyPlugin(fastifyUrl, {
   name: 'fastify-url',
+  fastify: '>=2.0.0',
 });

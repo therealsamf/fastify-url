@@ -16,9 +16,7 @@ A plugin for [fastify](https://www.fastify.io/) for accessing an incoming [reque
 ```javascript
 const fastify = require('fastify')();
 
-fastify.register(require('fastify-url'), (err) => {
-  if (err) throw err
-});
+fastify.register(require('fastify-url').default);
 
 fastify.get('/*', (req, reply) => {
   const url = req.url();
@@ -42,6 +40,10 @@ fastify.get('/*', (req, reply) => {
 
 // GET: 'https://user:pass@sub.example.com:8080/p/a/t/h?query=string'
 ```
+
+## Options
+
+
 
 ## `fastify-url` vs `fastify-url-data`
 
