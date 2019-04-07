@@ -2,13 +2,17 @@
   "name": "fastify-url",
   "version": "0.1.0",
   "description": "Fastify plugin for parsing and attaching URL data to requests",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prettier": "prettier --write \"src/**/*.ts\"",
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "test-ts": "tsd",
+    "test-ci": "npm test && npm test-ts",
     "build": "tsc",
     "lint": "eslint -c .eslintrc \"src/**/*.ts\"",
     "coverage": "nyc npm test",
+    "check-coverage": "nyc check-coverage --lines 95 --functions 95 --branches 95",
+    "report": "nyc report --reporter=text-lcov",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -18,7 +22,7 @@
   ],
   "author": "Sam Faulkner",
   "license": "MIT",
-  "typings": "fastify-url.d.ts",
+  "types": "fastify-url.d.ts",
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
@@ -26,6 +30,7 @@
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
     "chai": "^4.2.0",
+    "codecov": "^3.3.0",
     "eslint": "^5.16.0",
     "eslint-config-google": "^0.12.0",
     "eslint-config-prettier": "^4.1.0",
@@ -35,6 +40,7 @@
     "nyc": "^13.3.0",
     "prettier": "^1.16.4",
     "ts-node": "^8.0.3",
+    "tsd": "^0.7.2",
     "typescript": "^3.4.2"
   },
   "dependencies": {
@@ -52,10 +58,6 @@
     ],
     "require": [
       "ts-node/register"
-    ],
-    "reporter": [
-      "text-summary",
-      "html"
     ],
     "sourceMap": true,
     "instrument": true
