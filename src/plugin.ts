@@ -54,7 +54,7 @@ function fastifyUrl(
   next();
 }
 
-export default fastifyPlugin(fastifyUrl, {
+export = fastifyPlugin(fastifyUrl, {
   name: 'fastify-url',
   fastify: '>=2.0.0',
 });

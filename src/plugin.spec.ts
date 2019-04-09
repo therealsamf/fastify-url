@@ -11,7 +11,7 @@ import * as url from 'url';
 import * as fastify from 'fastify';
 import { assert } from 'chai';
 
-import fastifyUrl from './plugin';
+import fastifyUrl = require('./plugin');
 
 describe('fastifyUrl', function(): void {
   const fakeUrl = {

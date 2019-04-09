@@ -14,7 +14,7 @@ declare module 'fastify' {
   }
 }
 
-declare let fastifyUrl: Plugin<
+declare const fastifyUrl: Plugin<
   http.Server,
   http.IncomingMessage,
   http.ServerResponse,
