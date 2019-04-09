@@ -3,7 +3,7 @@ fastify-url
 
 [![NPM](https://img.shields.io/npm/v/fastify-url.svg)](https://www.npmjs.com/package/fastify-url)
 [![Build Status](https://travis-ci.org/therealsamf/fastify-url.svg?branch=master)](https://travis-ci.org/therealsamf/fastify-url)
-[![codecov.io Code Coverage](https://img.shields.io/codecov/c/github/therealsamf/fastify-url.svg?maxAge=2592000)](https://codecov.io/github/therealsamf/fastify-url?branch=master)
+[![codecov.io Code Coverage](https://img.shields.io/codecov/c/github/therealsamf/fastify-url.svg?maxAge=2592000)](https://codecov.io/github/therealsamf/fastify-url?branch=master) [![Greenkeeper badge](https://badges.greenkeeper.io/therealsamf/fastify-url.svg)](https://greenkeeper.io/)
 
 
 
