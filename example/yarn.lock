@@ -153,10 +153,10 @@ fastify-plugin@^1.5.0:
   dependencies:
     semver "^5.5.0"
 
-fastify-url@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/fastify-url/-/fastify-url-0.1.1.tgz#c303eb167d44238473c24063f477b1d574581f5f"
-  integrity sha512-GgtC3vy9SDyMmDkKWUyBcyEya/YmW1JwKP+iITytQFR1M+om3w79CIKpNHtWk8wnX6RhPgdMhXiRqUzKiSRoEA==
+fastify-url@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/fastify-url/-/fastify-url-0.2.0.tgz#2be56677adb3eeb25b5ac7a594a18b00e88f3d06"
+  integrity sha512-JaGddAgoBwlJf8tk3W5k/cQmxIc+Bq7YuCQoQw/ePhWoJ7b29iW54kuNSrjb2yoFJAPCEgNtw5TQGnOmEZcaMw==
   dependencies:
     fastify-plugin "^1.5.0"
 
