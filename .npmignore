@@ -8,6 +8,7 @@ tsconfig.json
 
 coverage/
 .nyc_output/
+greenkeeper.json
 example/
 .travis.yml
 fastify-url.test-d.ts
