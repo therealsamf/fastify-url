@@ -2,8 +2,8 @@
  * @fileoverview Entrypoint to the example for fastify-url
  */
 
-// ES6: import fastifyUrl from 'fastify-url';
-const fastifyUrl = require('fastify-url').default;
+// import fastifyUrl from 'fastify-url';
+const fastifyUrl = require('fastify-url');
 
 const fastify = require('fastify')({
   logger: { level: 'info', prettyPrint: true },
