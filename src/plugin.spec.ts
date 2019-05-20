@@ -26,18 +26,65 @@ describe('fastifyUrl', function(): void {
   };
 
   /**
-   * Test the plugin with the given urlObject to be fed into url.format.
+   * Generate a url string to use form the given parameters
    * @param {Partial<url.URL>} urlObject
+   * @return {string}
+   */
+  function generateUrlString(urlObject: Partial<url.URL>): string {
+    // @ts-ignore
+    urlObject.origin = `${urlObject.protocol}//${urlObject.hostname}`;
+    urlObject.host = `${urlObject.hostname}`;
+
+    // The href property depends on the inclusion of auth credentials
+    if (urlObject.username && urlObject.password) {
+      urlObject.href = `${urlObject.protocol}//${urlObject.username}:${
+        urlObject.password
+      }@${urlObject.host}${urlObject.pathname}${urlObject.search}`;
+    } else {
+      urlObject.href = `${urlObject.protocol}//${urlObject.host}${
+        urlObject.pathname
+      }${urlObject.search}`;
+    }
+
+    const urlString = url.format(
+      Object.assign(
+        {},
+        urlObject,
+        urlObject.username &&
+          urlObject.password && {
+            auth: `${urlObject.username}:${urlObject.password}`,
+          }
+      )
+    );
+
+    return urlString;
+  }
+
+  /**
+   * Test the plugin with the given url.
+   * @param {string} urlString
    * @param {boolean} passProtocol
+   * @param {http.OutgoingHttpHeaders=} extraHeaders
    */
   function testFastifyUrl(
-    urlObject: Partial<url.URL>,
-    passProtocol: boolean
+    urlString: string,
+    passProtocol: boolean,
+    extraHeaders?: http.OutgoingHttpHeaders
   ): void {
+    const urlTestObject = new url.URL(urlString);
+    const keys = [];
+    for (const key in urlTestObject) {
+      if (urlTestObject.hasOwnProperty(key)) {
+        keys.push(key);
+      }
+    }
+
+    const urlObject = url.parse(urlString);
+
     const description =
       'should parse and contain the correct data' +
-      (urlObject.username && urlObject.password
-        ? ' including basic authentication'
+      (urlObject.auth || (extraHeaders && extraHeaders.authentication)
+        ? ' including authentication'
         : '');
     it(description, function(done: (error?: Error) => void): void {
       const instance = fastify();
@@ -59,18 +106,38 @@ describe('fastifyUrl', function(): void {
           reply: fastify.FastifyReply<http.ServerResponse>
         ): Promise<void> => {
           const url = request.url();
+          if (url.searchParams && urlTestObject.searchParams) {
+            for (const key of urlTestObject.searchParams.keys()) {
+              assert.deepEqual(
+                url.searchParams.get(key),
+                urlTestObject.searchParams.get(key),
+                `URLSearchParams[${key}] doesn\'t match`
+              );
+            }
+          } else {
+            assert(
+              (url.searchParams && urlTestObject.searchParams) ||
+                (!url.searchParams && !urlTestObject.searchParams),
+              "invalid 'searchParams' property"
+            );
+          }
+
           try {
             await Promise.all(
-              Object.keys(urlObject).map(
-                async (key: keyof typeof urlObject): Promise<void> => {
+              keys.map(
+                async (key: keyof url.URL): Promise<void> => {
+                  if (key === 'searchParams') {
+                    return;
+                  }
+
                   assert.strictEqual(
                     url[key],
-                    urlObject[key],
+                    urlTestObject[key],
                     `incorrect ${key}`
                   );
                   assert.strictEqual(
                     request.url(key),
-                    urlObject[key],
+                    urlTestObject[key],
                     `incorrect ${key} when calling 'request.url(${key})'`
                   );
                 }
@@ -95,36 +162,14 @@ describe('fastifyUrl', function(): void {
 
           const port = (instance.server.address() as AddressInfo).port.toString();
           urlObject.port = port;
-          // @ts-ignore
-          urlObject.origin = `${urlObject.protocol}//${
-            urlObject.hostname
-          }:${port}`;
-          urlObject.host = `${urlObject.hostname}:${port}`;
+          urlTestObject.port = port;
 
-          // The href property depends on the inclusion of auth credentials
-          if (urlObject.username && urlObject.password) {
-            urlObject.href = `${urlObject.protocol}//${urlObject.username}:${
-              urlObject.password
-            }@${urlObject.host}${urlObject.pathname}${urlObject.search}`;
-          } else {
-            urlObject.href = `${urlObject.protocol}//${urlObject.host}${
-              urlObject.pathname
-            }${urlObject.search}`;
-          }
-
-          const urlString = url.format(
-            Object.assign(
-              {},
-              urlObject,
-              urlObject.username &&
-                urlObject.password && {
-                  auth: `${urlObject.username}:${urlObject.password}`,
-                }
-            )
-          );
           http
             // .get(new url.URL(urlString), (): void => {})
-            .get(url.parse(urlString))
+            .get({
+              ...urlObject,
+              ...(extraHeaders ? { headers: extraHeaders } : {}),
+            })
             .on('error', done)
             .on(
               'end',
@@ -137,12 +182,17 @@ describe('fastifyUrl', function(): void {
     });
   }
 
-  testFastifyUrl(fakeUrl, true);
+  testFastifyUrl(generateUrlString(fakeUrl), true);
   testFastifyUrl(
-    Object.assign({}, fakeUrl, {
-      username: 'user',
-      password: 'pass',
-    }),
+    generateUrlString(
+      Object.assign({}, fakeUrl, {
+        username: 'user',
+        password: 'pass',
+      })
+    ),
     false
   );
+  testFastifyUrl(generateUrlString(fakeUrl), false, {
+    authorization: '',
+  });
 });

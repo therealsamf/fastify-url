@@ -29,7 +29,10 @@ function fastifyUrl(
      */
     function(key?: string): url.URL | string {
       let auth = '';
-      if (this.headers.authorization) {
+      if (
+        this.headers.authorization !== undefined &&
+        this.headers.authorization !== null
+      ) {
         // See https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authorization_and_Proxy-Authorization_headers
         const [type, credentials]: string[] = this.headers.authorization.split(
           ' '
