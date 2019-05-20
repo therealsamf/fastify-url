@@ -73,10 +73,9 @@ describe('fastifyUrl', function(): void {
   ): void {
     const urlTestObject = new url.URL(urlString);
     const keys = [];
+    // eslint-disable-next-line guard-for-in
     for (const key in urlTestObject) {
-      if (urlTestObject.hasOwnProperty(key)) {
-        keys.push(key);
-      }
+      keys.push(key);
     }
 
     const urlObject = url.parse(urlString);

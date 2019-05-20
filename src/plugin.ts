@@ -48,7 +48,7 @@ function fastifyUrl(
         }${this.raw.url}`
       );
 
-      if (key) {
+      if (key !== undefined && key !== null) {
         return _url[key];
       }
       return _url;
