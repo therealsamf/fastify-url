@@ -33,7 +33,7 @@
     "codecov": "^3.3.0",
     "eslint": "^5.16.0",
     "eslint-config-google": "^0.13.0",
-    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-prettier": "^5.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "fastify": "^2.2.0",
     "mocha": "^6.0.2",
