@@ -1,7 +1,7 @@
 /**
  * @fileoverview Testing file for plugin.ts
  */
-// eslint-disable-next-line spaced-comment, @typescript-eslint/no-triple-slash-reference
+// eslint-disable-next-line spaced-comment, @typescript-eslint/triple-slash-reference
 /// <reference path="../fastify-url.d.ts" />
 
 import * as http from 'http';
@@ -31,6 +31,7 @@ describe('fastifyUrl', function(): void {
    * @return {string}
    */
   function generateUrlString(urlObject: Partial<url.URL>): string {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     urlObject.origin = `${urlObject.protocol}//${urlObject.hostname}`;
     urlObject.host = `${urlObject.hostname}`;
@@ -157,6 +158,7 @@ describe('fastifyUrl', function(): void {
 
         http
           // .get(new url.URL(urlString), (): void => {})
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
           // @ts-ignore
           .get({
             ...urlObject,
