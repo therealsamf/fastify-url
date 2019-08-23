@@ -37,13 +37,9 @@ describe('fastifyUrl', function(): void {
 
     // The href property depends on the inclusion of auth credentials
     if (urlObject.username && urlObject.password) {
-      urlObject.href = `${urlObject.protocol}//${urlObject.username}:${
-        urlObject.password
-      }@${urlObject.host}${urlObject.pathname}${urlObject.search}`;
+      urlObject.href = `${urlObject.protocol}//${urlObject.username}:${urlObject.password}@${urlObject.host}${urlObject.pathname}${urlObject.search}`;
     } else {
-      urlObject.href = `${urlObject.protocol}//${urlObject.host}${
-        urlObject.pathname
-      }${urlObject.search}`;
+      urlObject.href = `${urlObject.protocol}//${urlObject.host}${urlObject.pathname}${urlObject.search}`;
     }
 
     const urlString = url.format(
@@ -90,13 +86,11 @@ describe('fastifyUrl', function(): void {
 
       instance
         .register(fastifyUrl, passProtocol ? { protocol: 'http' } : undefined)
-        .after(
-          (error?: Error): void => {
-            if (error) {
-              done(error);
-            }
+        .after((error?: Error): void => {
+          if (error) {
+            done(error);
           }
-        );
+        });
 
       instance.get(
         '/*',
@@ -150,34 +144,29 @@ describe('fastifyUrl', function(): void {
         }
       );
 
-      instance.listen(
-        0,
-        (error?: Error): void => {
-          instance.server.unref();
-          if (error) {
-            done(error);
-            return;
-          }
-
-          const port = (instance.server.address() as AddressInfo).port.toString();
-          urlObject.port = port;
-          urlTestObject.port = port;
-
-          http
-            // .get(new url.URL(urlString), (): void => {})
-            .get({
-              ...urlObject,
-              ...(extraHeaders ? { headers: extraHeaders } : {}),
-            })
-            .on('error', done)
-            .on(
-              'end',
-              (): void => {
-                instance.close();
-              }
-            );
+      instance.listen(0, (error?: Error): void => {
+        instance.server.unref();
+        if (error) {
+          done(error);
+          return;
         }
-      );
+
+        const port = (instance.server.address() as AddressInfo).port.toString();
+        urlObject.port = port;
+        urlTestObject.port = port;
+
+        http
+          // .get(new url.URL(urlString), (): void => {})
+          // @ts-ignore
+          .get({
+            ...urlObject,
+            ...(extraHeaders ? { headers: extraHeaders } : {}),
+          })
+          .on('error', done)
+          .on('end', (): void => {
+            instance.close();
+          });
+      });
     });
   }
 
