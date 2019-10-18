@@ -42,11 +42,11 @@ function fastifyUrl(
           auth = Buffer.from(credentials, 'base64').toString() + '@';
         }
       }
-      const _url = new url.URL(
-        `${(options && options.protocol) || 'http'}://${auth}${
-          this.headers.host
-        }${this.raw.url}`
-      );
+      const protocol =
+        (options && options.protocol) || this.headers[':scheme'] || 'http';
+      const host = this.headers[':authority'] || this.headers.host;
+      const path = this.headers[':path'] || this.raw.url;
+      const _url = new url.URL(`${protocol}://${auth}${host}${path}`);
 
       if (key !== undefined && key !== null) {
         return _url[key];
