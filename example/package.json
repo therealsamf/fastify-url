@@ -6,6 +6,6 @@
   "dependencies": {
     "fastify": "^2.2.0",
     "fastify-url": "^0.2.2",
-    "pino-pretty": "^3.0.0"
+    "pino-pretty": "^4.0.0"
   }
 }
