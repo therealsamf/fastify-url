@@ -35,7 +35,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.1.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "fastify": "^2.2.0",
+    "fastify": "^2.14.1",
     "mocha": "^6.0.2",
     "nyc": "^14.1.1",
     "prettier": "^1.18.2",
