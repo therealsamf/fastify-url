@@ -4,7 +4,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "fastify": "^2.2.0",
+    "fastify": "^2.15.1",
     "fastify-url": "^0.2.2",
     "pino-pretty": "^3.0.0"
   }
